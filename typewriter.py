@@ -5,8 +5,8 @@
 #!.venv/bin/python
 import sys
 import io
-import keyboard
 import textwrap
+import keyboard
 from PIL import Image
 from PIL import ImageFont
 from PIL import ImageDraw
@@ -38,8 +38,8 @@ Y_OFFSET = 10
 DRAW_POINT = (X_OFFSET, Y_OFFSET)
 
 # Colors
-BACKGROUND = (255)
-FOREGROUND = (0)
+BACK = 255
+FORE = 0
 
 # Font
 # FONT_FILEPATH = '/usr/share/fonts/TTF/DejaVuSans.ttf'
@@ -57,13 +57,13 @@ while 1:
 
     # capture with record and add new loop for each space
     recorded = keyboard.record('space')
-    
+
     RECORDEDSTR = ''.join(list(keyboard.get_typed_strings(recorded, allow_backspace=True)))
     #print(RECORDEDSTR)
 
-    if RECORDEDSTR == "clear ": 
+    if RECORDEDSTR == "clear ":
         TEXT = ""
-    else: 
+    else:
         TEXT = TEXT + RECORDEDSTR
 
     LINES = textwrap.fill(TEXT, LINE_LENGTH)
@@ -71,9 +71,9 @@ while 1:
 
     # Draw image
     #img = Image.new("L", font.getmask(LINES).size, BACKGROUND)
-    img = Image.new("L", SCREEN_SIZE, BACKGROUND)
+    img = Image.new("L", SCREEN_SIZE, BACK)
     draw = ImageDraw.Draw(img)
-    draw.multiline_text(DRAW_POINT, LINES, font=font, fill=FOREGROUND, spacing = SPACING, align = ALIGNMENT)
+    draw.multiline_text(DRAW_POINT, LINES, font=font, fill=FORE, spacing=SPACING, align=ALIGNMENT)
     text_window = img.getbbox()
     img = img.crop(text_window)
 
